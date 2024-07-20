@@ -12,6 +12,18 @@ import struct
 import traceback
 import ast
 
+def clear_line(n=1):
+    LINE_UP = '\033[1A'
+    LINE_CLEAR = '\x1b[2K'
+    for i in range(n):
+        print(LINE_UP, end=LINE_CLEAR)
+
+def clear_screen():
+    if os.name == 'nt':  # For Windows
+        os.system('cls')
+    else:  # For Linux and macOS
+        os.system('clear')
+
 def get_first_entry(input_str):
     try:
         # Extract the part of the string that looks like a list
@@ -69,8 +81,15 @@ class Print:
 
     def error(header, message):
         print(f'[{time.strftime("%H:%M:%S")}] {Fore.RED + header + Fore.RESET} {message}')
+    
+    def payout(header, message):
+        print(f'[{time.strftime("%H:%M:%S")}] {Fore.BLUE + header + Fore.RESET} {message}')
 
     def neutral(message):
+        print(f'[{time.strftime("%H:%M:%S")}] {message}')
+
+    def skipped(message):
+        clear_line(2)
         print(f'[{time.strftime("%H:%M:%S")}] {message}')
 
     def suspense(message):
@@ -146,13 +165,20 @@ def receive_messages(client):
                         submit = True
                         #print(f"Received proof request: seed={r['seed']}, index={r['index']}")
                     else:
+                        clear_line(1)
                         printf.neutral(r["message"])
+                        
                 elif r["type"] == "error":
                     printf.error("Uh Oh!", r["message"])
                 elif r["type"] == "suspense":
                     printf.suspense(r["message"])
                 elif r["type"] == "winner":
                     printf.success("WOOHOO!", r["message"])
+                elif r["type"] == "payout":
+                    printf.success("PAYOUT!", r["message"])
+                elif r["type"] == "skipped":
+                    printf.neutral(r["message"])
+                    clear_line(1)
                 else:
                     printf.neutral(r["message"])
             except json.JSONDecodeError:
@@ -187,7 +213,7 @@ def send_messages(client):
                         valid_plot = True
                         break
                 if not valid_plot:
-                    print("No valid plot found, sending reject")
+                    clear_line(1)
                     client.sendall(prepare({"type": "reject", "address": address}))
         except Exception as e:
             print(f"Error in send_messages: {e}")
@@ -257,8 +283,8 @@ if __name__ == "__main__":
         elif command == "plot":
             dir = get_first_entry(plotting_dir)
             while True:
-                seed = int(input("Enter a seed (should be unique from your other plots) (0 - 24):\n"))
-                if seed >= 0 and seed <= 24:
+                seed = int(input("Enter a seed (should be unique from your other plots) (0 - 32):\n"))
+                if seed >= 0 and seed <= 32:
                     break
                 else:
                     print(printf.error("Seed must be between or equal to 0 - 24", ""))
