@@ -83,13 +83,13 @@ class Print:
         print(f'[{time.strftime("%H:%M:%S")}] {Fore.RED + header + Fore.RESET} {message}')
     
     def payout(header, message):
-        print(f'[{time.strftime("%H:%M:%S")}] {Fore.BLUE + header + Fore.RESET} {message}')
+        print(f'[{time.strftime("%H:%M:%S")}] {Fore.CYAN + header + Fore.RESET} {message}')
 
     def neutral(message):
         print(f'[{time.strftime("%H:%M:%S")}] {message}')
 
     def skipped(message):
-        clear_line(2)
+        clear_line(1)
         print(f'[{time.strftime("%H:%M:%S")}] {message}')
 
     def suspense(message):
@@ -165,7 +165,6 @@ def receive_messages(client):
                         submit = True
                         #print(f"Received proof request: seed={r['seed']}, index={r['index']}")
                     else:
-                        clear_line(1)
                         printf.neutral(r["message"])
                         
                 elif r["type"] == "error":
@@ -208,7 +207,7 @@ def send_messages(client):
                 for plot in plots.list_plots():
                     if plot["seed"] == str(index["seed"]):
                         data, _ = farmer.extract(plot["path"], index["index"])
-                        print(f"Submitting data: {data}")
+                        #print(f"Submitting data: {data}")
                         client.sendall(prepare({"type": "submit", "address": address, "data": [data, index["index"]]}))
                         valid_plot = True
                         break
@@ -287,7 +286,7 @@ if __name__ == "__main__":
                 if seed >= 0 and seed <= 32:
                     break
                 else:
-                    print(printf.error("Seed must be between or equal to 0 - 24", ""))
+                    print(printf.error("Seed must be between or equal to 0 - 32", ""))
             farmer.plot({"address": address, "seed": seed}, os.path.join(dir, f"{seed}.tiny"))
             
             # Update config with new plot directory if it's not already there
