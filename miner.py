@@ -365,7 +365,7 @@ def mine(client):
                 increment = out[2]
                 took = out[3]
                 hashrate = out[4]
-                pretty_print(f"Block was found in {took} with hashrate of {format_hashrate(int(float(hashrate)))}! Sending for rewiev..., BLOCK> {hash} / NONCE> {increment}", "warn", "JOB".replace('\n', ' '))
+                pretty_print(f"Block was found in {took} with hashrate of {format_hashrate(int(float(hashrate)))}! Sending for review..., BLOCK> {hash} / NONCE> {increment}", "warn", "JOB".replace('\n', ' '))
                 client.send(bytes(f"SUBMIT,{hash},{increment},{user}", encoding="utf8"))
                 terminateMining()
             else:
@@ -422,14 +422,14 @@ def receive_messages(client):
             elif data[0] == "TRUE":
                 globalFind = False
                 terminateMining()
-                pretty_print("YOHOO> Block was accepted", "success", "JOB")
+                pretty_print("WOOHOO> Block was accepted", "success", "JOB")
                 create_thread(fetch,client)
             elif data[0] == "FALSE":
                 if globalFind == True:
                     globalFind = False
                 else:  
                     terminateMining()
-                    pretty_print("UHHOUU> Block was found to be invalid", "error", "JOB")
+                    pretty_print("Uh Oh!> Block was found to be invalid", "error", "JOB")
                     create_thread(fetch,client)
             elif data[0] == "MSG":
                 pretty_print(f"{data[1]}", f"{data[2]}", "NET")
