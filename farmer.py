@@ -11,6 +11,41 @@ import signal
 import struct
 import traceback
 import ast
+import subprocess
+import sys
+
+lock = False
+key_pressed = False
+
+def interrupt_restart():
+    global key_pressed
+    input()
+    key_pressed = True
+    print("Key pressed! Interrupting the restart process. Goodbye!")
+
+def restartError():
+    global lock, key_pressed
+    if lock:
+        return
+    lock = True
+
+
+    print(">>> Restarting the farmer in 5 seconds.... Press any key to shutdown the farmer <<<")
+
+    interrupt_thread = threading.Thread(target=interrupt_restart)
+    interrupt_thread.start()
+
+    for _ in range(5):
+        time.sleep(1)
+        if key_pressed:
+            return
+    
+    if "skip" in sys.argv:
+        sys.argv.remove("skip")
+
+    new_args = sys.argv + ["skip"]
+    subprocess.call([sys.executable] + new_args)
+    os._exit(1)
 
 def clear_line(n=1):
     LINE_UP = '\033[1A'
@@ -188,6 +223,7 @@ def receive_messages(client):
             break
     print("Receiving thread stopped.")
     client.close()
+    restartError()
 
 def prepare(data):
     json_bytes = json.dumps(data).encode()
@@ -220,6 +256,7 @@ def send_messages(client):
             break
     print("Sending thread stopped.")
     client.close()
+    restartError()
 
 def signal_handler(sig, frame):
     global running
@@ -270,7 +307,11 @@ if __name__ == "__main__":
 """ + Fore.RESET)
     while True:
         print(f"Welcome {Fore.CYAN}{address}{Fore.RESET}! Enter {Fore.GREEN}'plot'{Fore.RESET} to start / edit plots, {Fore.GREEN}'farm'{Fore.RESET} to start earning, or {Fore.GREEN}'config'{Fore.RESET} to edit configuration!" + Fore.RESET)
-        command = input()
+
+        if "skip" in sys.argv:
+            command = "farm"
+        else:
+            command = input()
         print()
         if command == "farm":
             signal.signal(signal.SIGINT, signal_handler)
