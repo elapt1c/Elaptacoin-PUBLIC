@@ -52,3 +52,4 @@ Follow [the guide](MINERSETUP.md) to start mining.
 [API Guide](DEVGUIDE.md)
 
 ###### - Elaptacoin Team 2024, Written by tommarek
+###### [Privacy Policy](ElaptacoinPrivacyPolicy.pdf) and [Privacy Policy](ElaptacoinToS.pdf)
