@@ -29,7 +29,7 @@ We recomend downloading Python 3.8/3.9 from Microsoft Store, if you can't downlo
 **_(Note that other versions of Python wouldn't work!)_**
 
 ### 2. Download the latest release of PoW ElaptaCoin
-You can find the latest release on https://github.com/DuckyPolice/Elaptacoin-PUBLIC/releases/latest
+You can find the most recent release of elapMine on https://github.com/DuckyPolice/Elaptacoin-PUBLIC/releases/
 
 ### 3 Un-ZIP the latest release ZIP file
 
@@ -78,7 +78,7 @@ And install the python by typing `pyenv install 3.9.13` or `pyenv install 3.8.10
 **_(Note that other versions of Python wouldn't work!)_**
 
 ### 2. Download the latest release of PoW ElaptaCoin
-You can find the latest release on https://github.com/DuckyPolice/Elaptacoin-PUBLIC/releases/latest
+You can find the most recent release of elapMine on https://github.com/DuckyPolice/Elaptacoin-PUBLIC/releases/
 
 ### 3 Un-ZIP the latest release ZIP file
 You can use `unzip` 
