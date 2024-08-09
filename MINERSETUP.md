@@ -11,7 +11,7 @@ Welcome to the official page of ElaptaCoin Proof of Work Miner!
 5. **Auto Package Install** - The miner auto install all required packages
 
 #### Platform support
-1. Windows 10/11 (Theoretically Windows 7)
+1. Windows 10/11 (Theoretically Windows 7) **(Issues while exiting miner! Use Taskmgr!)**
 2. Linux x32/x64
 3. ARM x64 (AArch64)
 
@@ -35,9 +35,10 @@ You can find the latest release on https://github.com/DuckyPolice/Elaptacoin-PUB
 
 ### 4. Open the Un-ZIPed directory in Powershell
 
-### 5. Create and Enter Python virtualenv
+### 5. (OPTIONAL) Create and Enter Python virtualenv
+**>>>If you are having any issues with miner, try use virtualenv!<<<**
 
-**Virtualenv should be part of python, if you don't have it you can install the virtualenv by `pip3.9 install virtualenv` or `python3.8 -m venv venv`
+Virtualenv should be part of python, if you don't have it you can install the virtualenv by `pip3.9 install virtualenv` or `python3.8 -m venv venv`
 
 Type `python3.9 -m venv venv` or `python3.8 -m venv venv` to create virtualenv
 
@@ -46,8 +47,6 @@ Then type `venv\Scripts\Activate.ps1` in order to activate virtualenv
 Make sure there is `(.venv)` before path in powershell
 
 ### 6. Run the miner
-**You can use `python` now. Because if the virtualenv is activated the `pyhon` refers to the python in the virtualenv**
-
 To run the miner type `python miner.py` or `python3.9 miner.py` or `python3.8 miner.py`
 
 And Enjoy! If experience some errors let us know on our discord server!
@@ -88,9 +87,11 @@ We recomend to place the directory with miner to user folder
 
 ### 4. Open the Un-ZIPed directory in bash
 
-### 5. Create and Enter Python virtualenv
+### 5. (OPTIONAL) Create and Enter Python virtualenv
+**>>>If you are having any issues with miner, try use virtualenv!<<<**
 
-**Virtualenv should be part of python, if you don't have it you can install the virtualenv by `pip3.9 install virtualenv` or `python3.8 -m venv venv`
+
+Virtualenv should be part of python, if you don't have it you can install the virtualenv by `pip3.9 install virtualenv` or `python3.8 -m venv venv`
 
 Type `python3.9 -m venv venv` or `python3.8 -m venv venv` to create virtualenv
 
@@ -99,8 +100,6 @@ Then type `source myvenv/bin/activate` in order to activate virtualenv
 Make sure there is `(.venv)` before path in bash
 
 ### 6. Run the miner
-**You can use `python` now. Because if the virtualenv is activated the `pyhon` refers to the python in the virtualenv**
-
 **The miner needs to be executed by sudo privileges!**
 
 To run the miner type `python miner.py` or `python3.9 miner.py` or `python3.8 miner.py`

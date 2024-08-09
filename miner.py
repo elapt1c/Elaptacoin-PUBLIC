@@ -24,6 +24,7 @@ lock = False
 key_pressed = False
 globalFind = False
 hasherName = "EXAvatorNT"
+hasherSub = None
 
 def is_venv():
     return (hasattr(sys, 'real_prefix') or
@@ -60,7 +61,7 @@ def check_for_sudo():
 
 check_for_sudo()
 check_python_ver()
-check_inside_venv()
+#check_inside_venv()
 
 def install(package):
     try:
@@ -128,8 +129,12 @@ class thread_with_trace(threading.Thread):
 mineThread = thread_with_trace()
 
 def terminateMining():
-    global mineThread
+    global mineThread, hasherSub
     mineThread.kill()
+    try:     
+        hasherSub.terminate()
+    except:
+        pass
 
 def dummy():
     1+1
@@ -212,11 +217,23 @@ def fetch_or_create_config():
     
     return username
 
+def format_hashrate(rate):
+    units = ["H/s", "kH/s", "MH/s", "GH/s", "TH/s", "PH/s", "EH/s", "ZH/s", "YH/s"]
+    power = 0
+    
+    while rate >= 1000 and power < len(units) - 1:
+        rate /= 1000
+        power += 1
+
+    return f"{rate:.2f} {units[power]}"
+
 def getNetworkData(type):
     if type == 1:
         return "193.86.97.192"
     elif type == 2:
         return 12345
+    elif type == 3:
+        return "10.10.0.60"
 
 def enterExit():
     global running, spinning, closeage, lock
@@ -330,15 +347,16 @@ def fetch(client):
             create_thread(stopAll)
                 
 def mine(client):
-        global prev_hash, diff, user, spinning, hasherName, lock
+        global prev_hash, diff, user, spinning, hasherName, lock, hasherSub
         if lock == True:
             return
         pretty_print(f"Started mining, <--JOB INFO--> PREVIOUS BLOCK> {prev_hash} / DIFFICULTY> {difficulty_to_int(len(diff))}", "info", "JOB")
         create_thread(spinning_cursor_thread)
         try:
             args = [prev_hash, diff]
-            result = subprocess.run([hasherName] + args, capture_output=True, text=True)
-            out = result.stdout.split(",")
+            hasherSub = subprocess.Popen([hasherName] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            stdout, stderr = hasherSub.communicate()
+            out = stdout.strip().split(",")
             spinning = False
             if out[0] == "error":
                 raise Exception(out[1])
@@ -347,7 +365,7 @@ def mine(client):
                 increment = out[2]
                 took = out[3]
                 hashrate = out[4]
-                pretty_print(f"Block was found in {took} with hashrate of {hashrate} H/s! Sending for rewiev..., BLOCK> {hash} / NONCE> {increment}", "warn", "JOB".replace('\n', ' '))
+                pretty_print(f"Block was found in {took} with hashrate of {format_hashrate(int(float(hashrate)))}! Sending for review..., BLOCK> {hash} / NONCE> {increment}", "warn", "JOB".replace('\n', ' '))
                 client.send(bytes(f"SUBMIT,{hash},{increment},{user}", encoding="utf8"))
                 terminateMining()
             else:
@@ -404,14 +422,14 @@ def receive_messages(client):
             elif data[0] == "TRUE":
                 globalFind = False
                 terminateMining()
-                pretty_print("YOHOO> Block was accepted", "success", "JOB")
+                pretty_print("WOOHOO> Block was accepted", "success", "JOB")
                 create_thread(fetch,client)
             elif data[0] == "FALSE":
                 if globalFind == True:
                     globalFind = False
                 else:  
                     terminateMining()
-                    pretty_print("UHHOUU> Block was found to be invalid", "error", "JOB")
+                    pretty_print("Uh Oh!> Block was found to be invalid", "error", "JOB")
                     create_thread(fetch,client)
             elif data[0] == "MSG":
                 pretty_print(f"{data[1]}", f"{data[2]}", "NET")
