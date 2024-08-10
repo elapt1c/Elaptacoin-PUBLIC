@@ -20,6 +20,8 @@
 Follow [the guide](FARMERSETUP.md) to start farming.
 
 #### 2. Mining (Power Hungry)
+**>>>NOT FUNCTIONAL FOR NOW<<<** Refer to this message [here](https://discord.com/channels/1218785004063293491/1218968240227745853/1271851579393183845)
+
 **Mining utilizes CPU (GPU mining coming soon) to find hash that starts with specific amount of leading zeros.**
 
 Follow [the guide](MINERSETUP.md) to start mining.
