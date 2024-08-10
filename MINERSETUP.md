@@ -26,6 +26,8 @@ Our discord server: https://discord.com/invite/4MzUF5s6xC
 ### 1. Download Python 3.8 or 3.9
 We recomend downloading Python 3.8/3.9 from Microsoft Store, if you can't download Python 3.8/3.9 you can download it from Python offical webpage 
 
+**Note:** Don't forget to enable "include the python in PATH" in the installer!
+
 **_(Note that other versions of Python wouldn't work!)_**
 
 ### 2. Download the latest release of PoW ElaptaCoin
