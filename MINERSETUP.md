@@ -75,6 +75,8 @@ Update the pyenv by typing `pyenv update`
 
 And install the python by typing `pyenv install 3.9.13` or `pyenv install 3.8.10`
 
+Then use `pyenv global (version you installed)`
+
 **_(Note that other versions of Python wouldn't work!)_**
 
 ### 2. Download the latest release of PoW ElaptaCoin
@@ -101,6 +103,8 @@ Make sure there is `(.venv)` before path in bash
 
 ### 6. Run the miner
 **The miner needs to be executed by sudo privileges!**
+
+###### If you used `pyenv global` you can use `python miner.py` directly
 
 To run the miner type `python miner.py` or `python3.9 miner.py` or `python3.8 miner.py`
 
