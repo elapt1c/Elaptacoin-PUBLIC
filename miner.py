@@ -1,4 +1,4 @@
-#2.0V PoW miner
+# 2.0V PoW miner
 
 import pip
 import sys
@@ -481,6 +481,10 @@ print(Fore.LIGHTYELLOW_EX + "Welcome to the Single Thread CPU ELAP Miner 2.0 bui
 
 signal.signal(signal.SIGINT, signal_handler)
 
+# Initialize receive_thread and send_thread to None
+receive_thread = None
+send_thread = None
+
 try:
     user = fetch_or_create_config()
     checkHasher()
@@ -489,5 +493,8 @@ except Exception or KeyboardInterrupt as e:
     pretty_print(f"Something went wrong! Error: {e}", "error", "NET")
     create_thread(restartError)
 
-receive_thread.join()
-send_thread.join()
+# Join the threads only if they were successfully created
+if receive_thread is not None:
+    receive_thread.join()
+if send_thread is not None:
+    send_thread.join()
