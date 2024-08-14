@@ -11,7 +11,7 @@ Welcome to the official page of ElaptaCoin Proof of Space Farmer!
 
 **DISCLAIMER: There are few instability issues ongoing with the PoS Farmer currently!**
 
-# ElaptaCoin PoW Miner Setup Guide
+# ElaptaCoin PoS Farmer Setup Guide
 ## Windows and Linux (Packed Executable)
 ### 1. Download .zip folder for your targeted platform (Linux/Windows) 
 You can find the latest release on https://github.com/DuckyPolice/Elaptacoin-PUBLIC/releases/latest
