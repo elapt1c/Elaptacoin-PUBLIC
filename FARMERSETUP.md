@@ -44,6 +44,7 @@ Replace `username` with username of your Elaptacoin account
 ###### Don't have account yet? Follow the guide on [read me page](README.md)
 
 Replace the first entry `D:\\` with existing directory where you want to have your plots
+###### Keep the second entry there! It is neccesary to run the farmer
 
 If you want to use linux, you need to use file format. `/home` etc...
 
