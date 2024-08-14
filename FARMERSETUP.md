@@ -20,7 +20,8 @@ You can find the latest release on https://github.com/DuckyPolice/Elaptacoin-PUB
 ### 2. Unzip the zip folder.
 
 ### 3. Execute the farmer
-Open the farmer, the name of the farmer is `farmer.{deb or exe}`
+**If you are trying to execute the miner on linux, you might need to use this chmod command `chmod +x`**
+Open the farmer, the name of the farmer is `farmer.exe` for windows and for linux is `farmer`
 
 ### 4. Configure the farmer
 Close the farmer
