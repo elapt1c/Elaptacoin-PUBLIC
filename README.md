@@ -4,7 +4,9 @@
 **Elaptacoin is a cryptocurrency project built using Python and Flask, incorporating both Proof of Space and Proof of Work consensus mechanisms.**
 
 **[Official WhitePaper](https://docs.google.com/document/d/1Q3ykT3FgjmfyuQHpgezKyv-QMexi1cVoRwKNHT0IKxk/edit?usp=sharing)**
+
 **[Terms of Service](https://docs.google.com/document/d/1N3DzMkeD_Sr7b7SnymzjGPOCdWJ98GSHZrrFUyVKGBI/edit)**
+
 **[Privacy Policy](https://docs.google.com/document/d/1hCwMeucnD5C_cw00r4TlbORvd_arXFNrFCBi7CDFQ3A/edit)**
 
 ## How to earn Elaptacoin?
