@@ -36,6 +36,7 @@ Follow [the guide](MINERSETUP.md) to start mining.
 **List of exchanges:**
 - [ElaptaBot Exchange](https://discord.com/invite/4MzUF5s6xC) (DUCO to ELAP) 
 + [OTC Discord Channel](https://discord.com/invite/4MzUF5s6xC)
++ [Lucassobralofc Swap Site](http://lucassobralofc.whf.bz/) 
 
 (More exchanges coming soon)
 
